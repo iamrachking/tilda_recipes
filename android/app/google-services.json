@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "966568386746",
+    "project_id": "tilda-c0030",
+    "storage_bucket": "tilda-c0030.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966568386746:android:34b77e11e0fc2e07652283",
+        "android_client_info": {
+          "package_name": "com.example.tilda_recipes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDbhURwYq9pQ2LP88t20szhiiw_ioXaLk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
