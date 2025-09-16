@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tilda_recipes/screens/home.dart';
 import 'package:tilda_recipes/screens/onboarding.dart';
 import 'package:tilda_recipes/themes/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,18 +9,21 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  final prefs = await SharedPreferences.getInstance();
+  final seenOnboarding = prefs.getBool("onboarding_seen") ?? false;
+  runApp(MyApp(seenOnboarding: seenOnboarding));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool seenOnboarding;
+  const MyApp({super.key, required this.seenOnboarding});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: Onboarding(),
+      home: seenOnboarding ? HomeScreen() : Onboarding(),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tilda_recipes/screens/home.dart';
 import 'package:tilda_recipes/themes/app_theme.dart';
 import 'package:tilda_recipes/widgets/onboarding_page.dart';
 
@@ -11,6 +13,7 @@ class Onboarding extends StatefulWidget {
 
 class _OnboardingState extends State<Onboarding> {
   int currentPage = 0;
+  final PageController controller = PageController();
   final List<Map<String, String>> onboardingData = [
     {
       "image": "assets/images/onboarding_1_r.png",
@@ -37,7 +40,7 @@ class _OnboardingState extends State<Onboarding> {
       body: Stack(
         children: [
           PageView.builder(
-            controller: PageController(),
+            controller: controller,
             itemCount: onboardingData.length,
             onPageChanged: (index) => {
               setState(() {
@@ -82,7 +85,29 @@ class _OnboardingState extends State<Onboarding> {
                 Container(
                   margin: EdgeInsets.all(0),
                   width: double.infinity,
-                  child: ElevatedButton(onPressed: () {}, child: Text("Next")),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if (currentPage < onboardingData.length - 1) {
+                        controller.nextPage(
+                          duration: Duration(microseconds: 300),
+                          curve: Curves.ease,
+                        );
+                      } else {
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setBool('onboarding_seen', true);
+                        if (!mounted) return;
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (_) => HomeScreen()),
+                        );
+                      }
+                    },
+                    child: Text(
+                      currentPage == onboardingData.length - 1
+                          ? "Get Started"
+                          : "Next",
+                    ),
+                  ),
                 ),
               ],
             ),
