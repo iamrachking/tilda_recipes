@@ -1,19 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Like {
   final String userId;
   final DateTime createdAt;
 
   Like({required this.userId, required this.createdAt});
 
-  factory Like.fromMap(Map<String, dynamic> map) {
+  factory Like.fromJson(Map<String, dynamic> json) {
     return Like(
-      userId: map['userId'],
-      createdAt: (map['createdAt'] as Timestamp).toDate(),
+      userId: json['userId'] ?? "",
+      createdAt: DateTime.tryParse(json['created_at'] ?? '') ?? DateTime.now(),
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {'userId': userId, 'createdAt': createdAt};
+  Map<String, dynamic> toJson() {
+    return {'userId': userId, 'createdAt': createdAt.toIso8601String()};
   }
 }

@@ -74,8 +74,8 @@ class _OnboardingState extends State<Onboarding> {
                       height: 10,
                       decoration: BoxDecoration(
                         color: currentPage == index
-                            ? AppTheme.lightTheme.primaryColor
-                            : AppTheme.lightTheme.disabledColor,
+                            ? AppColors.primary
+                            : AppColors.gris,
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),

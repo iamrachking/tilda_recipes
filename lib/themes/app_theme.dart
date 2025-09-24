@@ -7,9 +7,12 @@ class AppColors {
   static const Color accent = Color(0xFFFFD700); // Jaune doré
   static const Color background = Color(0xFFFFFFFF); // Blanc
   static const Color textPrimary = Color(0xFF333333); // Gris foncé
-  static const Color textSecondary = Color(0xFF666666); // Gris moyen
+  // static const Color textSecondary = Color(0xFF666666); // Gris moyen
+  static const Color textSecondary = Color(0xFF9e9e9e); // Gris moyen
   static const Color error = Color(0xFFE53935); // Rouge erreur
   static const Color success = Color(0xFF4CAF50); // Vert succès
+  static const Color gris = Color(0xFF708090);
+  static const Color grisatre = Color(0xFFf3f4f6);
 }
 
 class AppTheme {
@@ -70,25 +73,25 @@ class AppTheme {
         ),
       ),
     ),
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: Colors.grey[100],
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide.none,
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: AppColors.primary, width: 2),
-      ),
-      hintStyle: GoogleFonts.poppins(color: AppColors.textSecondary),
-    ),
-    iconTheme: const IconThemeData(color: AppColors.primary),
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      primary: AppColors.primary,
-      secondary: AppColors.secondary,
-      error: AppColors.error,
-      background: AppColors.background,
-    ),
+    // inputDecorationTheme: InputDecorationTheme(
+    //   filled: true,
+    //   fillColor: Colors.grey[100],
+    //   border: OutlineInputBorder(
+    //     borderRadius: BorderRadius.circular(12),
+    //     borderSide: BorderSide.none,
+    //   ),
+    //   focusedBorder: OutlineInputBorder(
+    //     borderRadius: BorderRadius.circular(12),
+    //     borderSide: const BorderSide(color: AppColors.primary, width: 2),
+    //   ),
+    //   hintStyle: GoogleFonts.poppins(color: AppColors.textSecondary),
+    // ),
+    // iconTheme: const IconThemeData(color: AppColors.primary),
+    // colorScheme: ColorScheme.fromSwatch().copyWith(
+    //   primary: AppColors.primary,
+    //   secondary: AppColors.secondary,
+    //   error: AppColors.error,
+    //   background: AppColors.background,
+    // ),
   );
 }

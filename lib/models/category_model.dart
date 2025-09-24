@@ -1,23 +1,19 @@
 class Category {
-  final String categoryId;
+  final String? categoryId;
   final String name;
   final String imageUrl;
 
-  Category({
-    required this.categoryId,
-    required this.name,
-    required this.imageUrl,
-  });
+  Category({this.categoryId, required this.name, required this.imageUrl});
 
-  factory Category.fromMap(Map<String, dynamic> map, documentId) {
+  factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
-      categoryId: documentId,
-      name: map['name'],
-      imageUrl: map['imageUrl'],
+      categoryId: json['categoryId'],
+      name: json['name'] ?? "",
+      imageUrl: json['imageUrl'] ?? "",
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {categoryId: categoryId, name: name, imageUrl: imageUrl};
+  Map<String, dynamic> toJson() {
+    return {name: name, imageUrl: imageUrl};
   }
 }

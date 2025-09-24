@@ -1,24 +1,26 @@
+import 'package:tilda_recipes/models/ingredient_model.dart';
+
 class Recipe {
-  final String? recipeId;
+  final String recipeId;
   final String title;
-  final String imageUrl;
+  final String? imageUrl;
   final String description;
-  final List<String> ingredients;
+  final List<Ingredient> ingredients;
   final List<String> steps;
   final String categoryId;
   final String chefId;
   final String duration;
   final int likesCount;
   final int commentsCount;
-  // final int favoritesCount;
-  final int rating;
+  final int favoritesCount;
+  final double rating;
   final DateTime createdAt;
-  final DateTime updateAt;
+  final DateTime updatedAt;
 
   Recipe({
-    this.recipeId,
+    required this.recipeId,
     required this.title,
-    required this.imageUrl,
+    this.imageUrl,
     required this.description,
     required this.ingredients,
     required this.steps,
@@ -27,45 +29,53 @@ class Recipe {
     required this.duration,
     required this.likesCount,
     required this.commentsCount,
-    // required this.favoritesCount,
+    required this.favoritesCount,
     required this.rating,
     required this.createdAt,
-    required this.updateAt,
+    required this.updatedAt,
   });
 
-  factory Recipe.fromMap(Map<String, dynamic> map) {
+  factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(
-      title: map['title'],
-      imageUrl: map['imageUrl'],
-      description: map['description'],
-      ingredients: map['ingredients'],
-      steps: map['steps'],
-      categoryId: map['categoryId'],
-      chefId: map['chefId'],
-      duration: map['duration'],
-      likesCount: map['likesCount'],
-      commentsCount: map['commentsCount'],
-      rating: map['rating'],
-      createdAt: map['createdAt'],
-      updateAt: map['updateAt'],
+      recipeId: json['recipeId'] ?? json['id']?.toString() ?? '',
+      title: json['title'] ?? '',
+      imageUrl: json['imageUrl'] ?? "assets/images/default_recipe.png",
+      description: json['description'] ?? '',
+      ingredients:
+          (json['ingredients'] as List<dynamic>?)
+              ?.map((e) => Ingredient.fromJson(e))
+              .toList() ??
+          [],
+      steps: List<String>.from(json['steps'] ?? []),
+      categoryId: json['categoryId'] ?? '',
+      chefId: json['chefId'] ?? '',
+      duration: json['duration'] ?? '',
+      likesCount: json['likesCount'] ?? 0,
+      commentsCount: json['commentsCount'] ?? 0,
+      favoritesCount: json['favoritesCount'] ?? 0,
+      rating: (json['rating'] ?? 0.0).toDouble(),
+      createdAt: DateTime.tryParse(json['created_at'] ?? '') ?? DateTime.now(),
+      updatedAt: DateTime.tryParse(json['updated_at'] ?? '') ?? DateTime.now(),
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
+      'recipeId': recipeId,
       'title': title,
       'imageUrl': imageUrl,
       'description': description,
-      'ingredients': ingredients,
+      'ingredients': ingredients.map((e) => e.toJson()).toList(),
       'steps': steps,
       'categoryId': categoryId,
       'chefId': chefId,
       'duration': duration,
       'likesCount': likesCount,
       'commentsCount': commentsCount,
+      'favoritesCount': favoritesCount,
       'rating': rating,
-      'createdAt': createdAt,
-      'updateAt': updateAt,
+      'created_at': createdAt.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
     };
   }
 }
